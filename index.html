@@ -41,15 +41,14 @@
             var letters = "abcdefghijklmnopqrstuvwxyz"
             var specialCharacters = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
             var randomString = "";
-            var password = "";
-            console.log(specialCharacters);
+            var password = ""; 
+            //hide the error message 
+            document.getElementById("errorMessage").style.display = "none";
             //prompt for the length of the password
             var passLength = prompt("How long should your password be? ( must be between 8 and 128 characters");
             //verify that the password length is between 8 and 128 characters
             if (passLength < 8 || passLength > 128) {
-                alert("Password is either too short or too long")
-                document.getElementById('passBox').value = 'Password is either too short or too long'
-
+                document.getElementById("errorMessage").style.display = "block";
             }
             else {
                 //prompt for character type. lower case / upper case / special characters
@@ -72,22 +71,47 @@
             for (var i = 1; i <= passLength; i++) {
                 var num = Math.floor(Math.random() * randomString.length) ;
                 password = password + randomString.charAt(num);
-                document.getElementById('passBox').value = password;
+                document.getElementById("passBox").value = password;
             }
            
             
       }
     </script>
-    <form>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Generate a Password</label>
-            <textarea class="form-control" aria-label="With textarea" id="passBox"></textarea>
-        </div>
-
-        <button type="button" class="btn btn-primary" onclick="generatePass()">
-            Generate Password
-        </button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="jumbotron">
+                    <h1 class="display-6" style="margin: 0 auto; color:blue">Password Generator!</h1>
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-md-12 mt-30">
+                            <p class="text-center" style="color: red;display: none;" id="errorMessage">Password length must be between 8 and 128 characters</p>
+                        </div>
+                    </div>
+                    <div class="jumbotron" style="background-color: aliceblue;">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Your Password</label>
+                                <textarea class="form-control" aria-label="With textarea" id="passBox"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4 ">
+                                    <button type="button" class="btn btn-primary " style="background-color: rgb(20, 100, 220);" onclick="generatePass()">
+                                        Generate Password
+                                    </button>
+                                </div>   
+                                <div class="col-md-4"></div>
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-md-3"></div>    
+        </div>     
+    </div>
 </body>
 
 </html>
