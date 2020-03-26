@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <title>Password Generator</title>
+</head>
+
+<body>
+    <!-- GIVEN I need a new, secure password
+    WHEN I click the button to generate a password
+    THEN I am presented with a series of prompts for password criteria
+    WHEN prompted for password criteria
+    THEN I select which criteria to include in the password
+    WHEN prompted for the length of the password
+    THEN I choose a length of at least 8 characters and no more than 128 characters
+    WHEN prompted for character types to include in the password
+    THEN I choose lowercase, uppercase, numeric, and/or special characters
+    WHEN I answer each prompt
+    THEN my input should be validated and at least one character type should be selected
+    WHEN all prompts are answered
+    THEN a password is generated that matches the selected criteria
+    WHEN the password is generated
+    THEN the password is either displayed in an alert or written to the page    -->
+    <script>
+        function generatePass() {
+            var letters = "abcdefghijklmnopqrstuvwxyz"
+            var specialCharacters = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+            var randomString = "";
+            var password = "";
+            console.log(specialCharacters);
+            //prompt for the length of the password
+            var passLength = prompt("How long should your password be? ( must be between 8 and 128 characters");
+            //verify that the password length is between 8 and 128 characters
+            if (passLength < 8 || passLength > 128) {
+                alert("Password is either too short or too long")
+                document.getElementById('passBox').value = 'Password is either too short or too long'
+
+            }
+            else {
+                //prompt for character type. lower case / upper case / special characters
+                var useUpperCase = confirm("Do you want to use UPPER case characters?\n'OK' for Yes 'Cancel' for No")
+                var useLowerCase = confirm("Do you want to use LOWER case characters?\n'OK' for Yes 'Cancel' for No")
+                var useSpecialChar = confirm("Do you want to use SPECIAL characters?\n'OK' for Yes 'Cancel' for No")
+            }
+
+            //build string that will be used by the random function to pick a random character.
+            if(useUpperCase){
+                randomString = letters.toLocaleUpperCase();
+            }
+            if(useLowerCase){
+                randomString = randomString + letters;
+            }
+            if(useSpecialChar) {
+                randomString = randomString + specialCharacters;
+            }
+            //generate password
+            for (var i = 1; i <= passLength; i++) {
+                var num = Math.floor(Math.random() * randomString.length) ;
+                password = password + randomString.charAt(num);
+                document.getElementById('passBox').value = password;
+            }
+           
+            
+      }
+    </script>
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Generate a Password</label>
+            <textarea class="form-control" aria-label="With textarea" id="passBox"></textarea>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="generatePass()">
+            Generate Password
+        </button>
+    </form>
+</body>
+
+</html>
