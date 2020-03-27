@@ -1,5 +1,8 @@
+var buttonClick = document.querySelector("#genButton");
+
 
 function generatePass() {
+    event.preventDefault();
     var letters = "abcdefghijklmnopqrstuvwxyz"
     var specialCharacters = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
     var numberList = "0123456789"
@@ -10,7 +13,7 @@ function generatePass() {
     var useUpperCase = document.getElementById("upperCase");
     var useNumbers =  document.getElementById("numbers");
     var useSpecialChar =  document.getElementById("specialChar");
-    
+    var button = document.getElementById("button");
     document.getElementById("errorMessage").style.display = "none";
     //verify that the password length is between 8 and 128 characters
     if(isNaN(passLength)) {
@@ -48,3 +51,4 @@ function generatePass() {
    
     console.log(password);
 }
+buttonClick.addEventListener("click",generatePass);
