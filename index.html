@@ -16,6 +16,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <script src="script.js"></script>   
 
     <title>Password Generator</title>
 </head>
@@ -36,47 +37,7 @@
     THEN a password is generated that matches the selected criteria
     WHEN the password is generated
     THEN the password is either displayed in an alert or written to the page    -->
-    <script>
-        function generatePass() {
-            var letters = "abcdefghijklmnopqrstuvwxyz"
-            var specialCharacters = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
-            var randomString = "";
-            var password = ""; 
-            //hide the error message 
-            document.getElementById("errorMessage").style.display = "none";
-            //prompt for the length of the password
-            var passLength = prompt("How long should your password be? ( must be between 8 and 128 characters");
-            //verify that the password length is between 8 and 128 characters
-            if (passLength < 8 || passLength > 128) {
-                document.getElementById("errorMessage").style.display = "block";
-            }
-            else {
-                //prompt for character type. lower case / upper case / special characters
-                var useUpperCase = confirm("Do you want to use UPPER case characters?\n'OK' for Yes 'Cancel' for No")
-                var useLowerCase = confirm("Do you want to use LOWER case characters?\n'OK' for Yes 'Cancel' for No")
-                var useSpecialChar = confirm("Do you want to use SPECIAL characters?\n'OK' for Yes 'Cancel' for No")
-            }
-
-            //build string that will be used by the random function to pick a random character.
-            if(useUpperCase){
-                randomString = letters.toLocaleUpperCase();
-            }
-            if(useLowerCase){
-                randomString = randomString + letters;
-            }
-            if(useSpecialChar) {
-                randomString = randomString + specialCharacters;
-            }
-            //generate password
-            for (var i = 1; i <= passLength; i++) {
-                var num = Math.floor(Math.random() * randomString.length) ;
-                password = password + randomString.charAt(num);
-                document.getElementById("passBox").value = password;
-            }
-           
-            
-      }
-    </script>
+   
     <div class="container">
         <div class="row">
             <div class="col-md-3"></div>
@@ -85,9 +46,64 @@
                     <h1 class="display-6" style="margin: 0 auto; color:blue">Password Generator!</h1>
                     <hr class="my-4">
                     <div class="row">
-                        <div class="col-md-12 mt-30">
-                            <p class="text-center" style="color: red;display: none;" id="errorMessage">Password length must be between 8 and 128 characters</p>
+                        <div class="col-md-12">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Length between 8 and 128 characters</span>
+                                </div>
+                                <input type="text" class="form-control" id="passLength">
+                            </div> 
+                        </div>    
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <input type="checkbox" id="numbers">
+                                  </div>
+                                </div>
+                                <label > Numbers </label>
+                              </div>
+                        </div>
+                                <div class="col-md-3">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                            <input type="checkbox" id="upperCase">
+                                          </div>
+                                        </div>
+                                        <label > Uppercase</label>
+                                      </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                            <input type="checkbox" id="lowerCase">
+                                          </div>
+                                        </div>
+                                        <label > Lowercase</label>
+                                      </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                            <input type="checkbox" id="specialChar">
+                                          </div>
+                                        </div>
+                                        <label > Special Char</label>
+                                      </div>
+                                </div>
+                               
+                            
+                        
                     </div>
                     <div class="jumbotron" style="background-color: aliceblue;">
                         <form>
@@ -102,7 +118,13 @@
                                         Generate Password
                                     </button>
                                 </div>   
-                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-12 ">
+                                    <p class="text-center" style="color: red;display: none; margin-top: 20px;" id="errorMessage"></p>
+                                </div>
                             </div>
                         </form>
                     </div>
