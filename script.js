@@ -19,14 +19,17 @@ function generatePass() {
     if(isNaN(passLength)) {
         document.getElementById("errorMessage").style.display = "block";
         document.getElementById("errorMessage").textContent = "Length must be at number";
+        return null;
     }
     else if (passLength < 8)  {
         document.getElementById("errorMessage").style.display = "block";
         document.getElementById("errorMessage").textContent = "Length must be at least 8 characters";
+        return null;
     }
     else if(passLength > 128){ 
         document.getElementById("errorMessage").style.display = "block";
         document.getElementById("errorMessage").textContent = "Length can not be longer that 128 characters";
+        return null;
     }
   
     //build string that will be used by the random function to pick a random character.
